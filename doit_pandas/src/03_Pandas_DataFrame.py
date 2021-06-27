@@ -243,5 +243,20 @@ print('-'*30)
 # 데이터를 피클, CSV, TSV 파일로 저장하고 불러오기
 names = scientists['Name']
 names.to_pickle('../output/scientists_names_series.pickle')
-print('-'*30)
 scientists.to_pickle('../output/scientists_df.pickle')
+
+scientist_names_from_pickle = pd.read_pickle('../output/scientists_names_series.pickle')
+print( scientist_names_from_pickle )
+print('-'*30)
+
+names.to_csv('../output/scientist_names_series.csv')
+scientists.to_csv('../output/scientists_df.tsv', sep='\t')
+
+# 시리즈와 데이터프레임을 엑셀 파일로 저장하기
+names_df = names.to_frame()
+
+import xlwt
+names_df.to_excel('../output/scientists_names_series_df.xls')
+
+import openpyxl
+names_df.to_excel('../output/scientists_names_series_df.xlsx')
